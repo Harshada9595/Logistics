@@ -1,0 +1,14 @@
+
+<div class="dashboard">
+  <mat-card class="stat-card" *ngFor="let stat of stats">
+    <h3>{{ stat.title }}</h3>
+    <h1>{{ stat.value }}</h1>
+  </mat-card>
+
+  <mat-card class="chart-card">
+    <canvas baseChart
+      [data]="tripChartData"
+      [type]="tripChartType"> <!-- Changed [chartType] to [type] -->
+    </canvas>
+  </mat-card>
+</div>

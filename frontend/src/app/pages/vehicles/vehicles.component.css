@@ -1,0 +1,27 @@
+.component-card {
+  margin: 20px;
+}
+
+.full-width-filter {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.8em;
+  font-weight: bold;
+  color: white;
+}
+
+.available {
+  background-color: #4CAF50; /* Green */
+}
+
+.unavailable {
+  background-color: #f44336; /* Red */
+}
