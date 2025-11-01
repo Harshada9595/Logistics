@@ -1,22 +1,27 @@
 export interface Trip {
-  id: number;
+  tripId: number;
   destination: string;
-  driverId: number | null;
-  vehicleId: number | null;
+  driverId: number;
+  vehicleId: number;
   status: string;
+  startTime: string;
+  endTime: string;
 }
+export type TripCreate = Omit<Trip, 'tripId'>;
 
 
 export interface Driver {
-  id: number;
+  driverId: number;
   name: string;
   isAvailable: boolean;
 }
+export type DriverCreate = Omit<Driver, 'driverId'>;
 
 export interface Vehicle {
-  id: number;
+  vehicleId: number;
   model: string;
   licensePlate: string;
   isAvailable: boolean;
 }
+export type VehicleCreate = Omit<Vehicle, 'vehicleId'>;
 

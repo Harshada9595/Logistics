@@ -1,41 +1,41 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Trip } from '../models';
+import { Trip, TripCreate } from '../models'; // or adjust the path if needed
 
 @Injectable({ providedIn: 'root' })
 export class TripService {
-  private baseUrl = 'http://localhost:5204/api/trips'; // your backend
+  private baseUrl = 'http://localhost:5204/api/trips';
 
   constructor(private http: HttpClient) {}
 
-  getTrips(): Observable<any[]> {
-    return this.http.get<any[]>(this.baseUrl);
+  getTrips(): Observable<Trip[]> {
+    return this.http.get<Trip[]>(this.baseUrl);
   }
 
-  createTrip(trip: any): Observable<any> {
+  createTrip(trip: TripCreate): Observable<any> {
     return this.http.post(this.baseUrl, trip);
   }
 
-  getActiveTrips(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/active`);
-  }
-
-  getCompletedTrips(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/completed`);
-  }
-
-  getLongTrips(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/long`);
-  }
   
+  updateTrip(tripId: number, tripPayload: any): Observable<any> {
+  return this.http.put(`${this.baseUrl}/${tripId}`, tripPayload);
+}
 
-  updateTrip(id: number, trip: Trip): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, trip);
+
+  deleteTrip(tripId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${tripId}`);
   }
 
- 
-  deleteTrip(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+  getActiveTrips(): Observable<Trip[]> {
+    return this.http.get<Trip[]>(`${this.baseUrl}/active`);
+  }
+
+  getCompletedTrips(): Observable<Trip[]> {
+    return this.http.get<Trip[]>(`${this.baseUrl}/completed`);
+  }
+
+  getLongTrips(): Observable<Trip[]> {
+    return this.http.get<Trip[]>(`${this.baseUrl}/long`);
   }
 }

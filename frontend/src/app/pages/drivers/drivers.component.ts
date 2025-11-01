@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { Driver } from '../../models';
+import { Driver , DriverCreate} from '../../models';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DriverService } from '../../services/driver.service';
@@ -55,22 +55,20 @@ export class DriverComponent implements OnInit {
 
   updateDriver(): void {
     if (this.selectedDriver) {
-      // DEBUG: Log the ID and availability status before the API call
-      console.log("Attempting to update driver ID:", this.selectedDriver.id, "Availability:", this.selectedDriver.isAvailable);
+      console.log("Attempting to update driver ID:", this.selectedDriver.driverId, "Availability:", this.selectedDriver.isAvailable);
 
-      // FIX: Removed the duplicated 'this.driverService'
+     
       this.driverService
-        .updateDriverAvailability(this.selectedDriver.id, this.selectedDriver.isAvailable)
+        .updateDriverAvailability(this.selectedDriver.driverId, this.selectedDriver.isAvailable)
         .subscribe({
           next: () => {
             console.log("Driver availability updated successfully.");
-            this.loadDrivers(); // Reload the list to reflect the change
+            this.loadDrivers();
             this.selectedDriver = null;
           },
           error: (err: HttpErrorResponse) => {
             console.error('Error updating driver availability:', err);
             if (err.error) {
-              // The 400 Bad Request usually means the backend rejected the data/URL
               console.error('Backend validation error details:', err.error);
             }
           }
@@ -81,8 +79,8 @@ export class DriverComponent implements OnInit {
   }
 
 
-  deleteDriver(id: number): void {
-    this.driverService.deleteDriver(id).subscribe({
+  deleteDriver(driverId: number): void {
+    this.driverService.deleteDriver(driverId).subscribe({
       next: () => {
         this.loadDrivers();
       },

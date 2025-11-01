@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Driver } from '../models';
+import { Driver, DriverCreate} from '../models';
 
 @Injectable({
   providedIn: 'root',
@@ -15,22 +15,22 @@ export class DriverService {
     return this.http.get<Driver[]>(this.baseUrl);
   }
 
-  // Create method sends the object without the ID field
+
   createDriver(driver: Partial<Driver>): Observable<Driver> {
     return this.http.post<Driver>(this.baseUrl, driver);
   }
 
-  // Update method sends the object with the ID in the URL and body
-  updateDriver(id: number, driver: Driver): Observable<Driver> {
-    return this.http.put<Driver>(`${this.baseUrl}/${id}`, driver);
+  
+  updateDriver(driverId: number, driver: Driver): Observable<Driver> {
+    return this.http.put<Driver>(`${this.baseUrl}/${driverId}`, driver);
   }
 
-   updateDriverAvailability(id: number, isAvailable: boolean): Observable<any> {
-     return this.http.patch(`${this.baseUrl}/${id}/availability`, { isAvailable });
+   updateDriverAvailability(driverId: number, isAvailable: boolean): Observable<any> {
+     return this.http.patch(`${this.baseUrl}/${driverId}/availability`, { isAvailable });
   }
-  // Delete method sends the ID in the URL
-  deleteDriver(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+  
+  deleteDriver(driverId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${driverId}`);
   }
    getAvailableDrivers(): Observable<Driver[]> {
     return this.http.get<Driver[]>(`${this.baseUrl}/available`);

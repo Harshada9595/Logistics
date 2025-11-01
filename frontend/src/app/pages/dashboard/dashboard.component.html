@@ -1,14 +1,28 @@
+<div class="dashboard-container">
 
-<div class="dashboard">
-  <mat-card class="stat-card" *ngFor="let stat of stats">
-    <h3>{{ stat.title }}</h3>
-    <h1>{{ stat.value }}</h1>
-  </mat-card>
+  <!-- Dashboard Header -->
+  <div class="dashboard-header">
+    <h1>📊 Fleet Management Dashboard</h1>
+    <p>Monitor your trips, drivers, and vehicle activity at a glance</p>
+  </div>
 
-  <mat-card class="chart-card">
-    <canvas baseChart
-      [data]="tripChartData"
-      [type]="tripChartType"> <!-- Changed [chartType] to [type] -->
-    </canvas>
-  </mat-card>
+  <!-- Stats Cards -->
+  <div class="stats-grid">
+    <mat-card class="stat-card" *ngFor="let stat of stats">
+      <h3>{{ stat.title }}</h3>
+      <h1>{{ stat.value }}</h1>
+    </mat-card>
+  </div>
+
+  <!-- Chart Section -->
+  <div class="chart-section">
+    <mat-card class="chart-card">
+      <h2>Trip Status Overview</h2>
+      <canvas
+        baseChart
+        [data]="tripChartData"
+        [type]="tripChartType">
+      </canvas>
+    </mat-card>
+  </div>
 </div>

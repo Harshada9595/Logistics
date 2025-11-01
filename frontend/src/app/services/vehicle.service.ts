@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Vehicle } from '../models';
+import { Vehicle, VehicleCreate } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class VehicleService {
@@ -13,20 +13,20 @@ export class VehicleService {
     return this.http.get<Vehicle[]>(this.baseUrl);
   }
 
-  getVehicleById(id: number): Observable<Vehicle> {
-    return this.http.get<Vehicle>(`${this.baseUrl}/${id}`);
+  getVehicleById(vehicleId: number): Observable<Vehicle> {
+    return this.http.get<Vehicle>(`${this.baseUrl}/${vehicleId}`);
   }
 
   createVehicle(vehicle: Partial<Vehicle>): Observable<Vehicle> {
     return this.http.post<Vehicle>(this.baseUrl, vehicle);
   }
 
-  updateVehicle(id: number, vehicle: Partial<Vehicle>): Observable<Vehicle> {
-    return this.http.put<Vehicle>(`${this.baseUrl}/${id}`, vehicle);
+  updateVehicle(vehicleId: number, vehicle: Partial<Vehicle>): Observable<Vehicle> {
+    return this.http.put<Vehicle>(`${this.baseUrl}/${vehicleId}`, vehicle);
   }
 
-  deleteVehicle(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  deleteVehicle(vehicleId: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${vehicleId}`);
   }
 
   getAvailableVehicles(): Observable<Vehicle[]> {
